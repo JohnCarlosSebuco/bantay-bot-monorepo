@@ -1,5 +1,5 @@
 export const CONFIG = {
-  DEMO_MODE: false,
+  DEMO_MODE: true,
   ESP32_IP: '192.168.1.100',
   ESP32_PORT: 80,
   WEBSOCKET_PORT: 81,

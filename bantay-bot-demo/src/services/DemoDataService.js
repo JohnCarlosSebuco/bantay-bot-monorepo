@@ -8,9 +8,9 @@ class DemoDataService {
   generateSensorData() {
     return {
       motion: Math.random() > 0.95 ? 1 : 0,
-      distance: Math.floor(Math.random() * 100) + 10,
-      temperature: 25 + Math.random() * 10,
-      humidity: 50 + Math.random() * 30,
+      distance: Math.floor(Math.random() * 90) + 10, // 10-99 cm
+      temperature: Math.round((25 + Math.random() * 10) * 10) / 10, // 25-35°C, 1 decimal
+      humidity: Math.round((50 + Math.random() * 30) * 10) / 10, // 50-80%, 1 decimal
       soilMoisture: Math.floor(Math.random() * 1024),
       timestamp: new Date().toISOString()
     };
@@ -21,6 +21,10 @@ class DemoDataService {
     
     this.isRunning = true;
     this.emit('connected', true);
+    
+    // Send initial data immediately
+    const initialData = this.generateSensorData();
+    this.emit('data', initialData);
     
     this.interval = setInterval(() => {
       const data = this.generateSensorData();
